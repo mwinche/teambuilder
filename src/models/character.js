@@ -6,6 +6,28 @@ require(['lib/underscore-min.js', 'lib/backbone-min'], function(_, Backbone){
 
 		addFEClass:function(feClass){
 			this.get('feClasses').add(feClass);
+		},
+
+		getFEClasses:function(parent1, parent2){
+			return _.union(
+				this.get('feClasses').map(function(item){return item.get('name');}),
+				parent1 ? parent1.getFEClasses() : [],
+				parent2 ? parent2.getFEClasses() : []);
+		},
+
+		setOptionalParent:function(parent){
+			if(!parent){
+				this.set('optionalParent', null);
+			}
+			else if(_.contains(this.get('parentOptions'), parent.get('name'))){
+				this.set('optionalParent', parent.get('name'));
+			}
+			//Special case for Morgan/Avatar
+			else if(_.contains(this.get('parentOptions'), '*')){
+				if(parent.get('gender') === this.get('gender')){
+					this.set('optionalParent', parent.get('name'));
+				}
+			}
 		}
 	});
 
