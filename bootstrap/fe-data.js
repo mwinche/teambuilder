@@ -1,4 +1,4 @@
-require(
+define(
 	[
 		'src/collections/characters',
 		'src/models/character',
@@ -21,14 +21,14 @@ require(
 		initial = new Characters(),
 		dlc = new Characters(),
 		feData = {
-		characters:{
-			children:children,
-			initial:initial,
-			dlc:dlc
-		},
-		feclasses:{},
-		skills:{}
-	};
+			characters:{
+				children:children,
+				initial:initial,
+				dlc:dlc
+			},
+			feclasses:{},
+			skills:{}
+		};
 
 	initial.add(new Character({name:'Chrom',		gender:'M'}));
 	initial.add(new Character({name:'Avatar (M)',	gender:'M'}));
@@ -111,6 +111,8 @@ require(
 
 	children.getByName('Morgan (F)').set('parentOptions', ['*']);
 	children.getByName('Morgan (M)').set('parentOptions', ['*']);
+
+	debugger;
 
 	return feData;
 });

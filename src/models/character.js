@@ -1,4 +1,4 @@
-require(['lib/underscore-min.js', 'lib/backbone-min'], function(_, Backbone){
+define(['underscore', 'backbone'], function(_, Backbone){
 	var CharacterModel = Backbone.Model.extend({
 		initialize:function(){
 			this.set('feClasses', new Backbone.Collection());
@@ -17,7 +17,7 @@ require(['lib/underscore-min.js', 'lib/backbone-min'], function(_, Backbone){
 
 		setOptionalParent:function(parent){
 			if(!parent){
-				this.set('optionalParent', null);
+				this.unset('optionalParent');
 			}
 			else if(_.contains(this.get('parentOptions'), parent.get('name'))){
 				this.set('optionalParent', parent.get('name'));

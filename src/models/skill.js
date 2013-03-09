@@ -1,3 +1,3 @@
-require(['lib/underscore-min.js', 'lib/backbone-min.js'], function(_, Backbone){
+define(['underscore', 'backbone'], function(_, Backbone){
 	return Backbone.Model.extend();
 });

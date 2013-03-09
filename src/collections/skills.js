@@ -1,5 +1,5 @@
-require(['lib/backbone-min.js', 'src/models/skill'], function(Backbone, Skill){
-	return new Backbone.Collection.extend({
+define(['backbone', 'src/models/skill'], function(Backbone, Skill){
+	return Backbone.Collection.extend({
 		model: Skill
 	});
 });
