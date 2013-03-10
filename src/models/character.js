@@ -11,8 +11,8 @@ define(['underscore', 'backbone'], function(_, Backbone){
 		getFEClasses:function(parent1, parent2){
 			return _.union(
 				this.get('feClasses').map(function(item){return item.get('name');}),
-				parent1 ? parent1.getFEClasses() : [],
-				parent2 ? parent2.getFEClasses() : []);
+				parent1 ? parent1.getInheritedFEClasses(this) : [],
+				parent2 ? parent2.getInheritedFEClasses(this) : []);
 		},
 
 		setOptionalParent:function(parent){
@@ -28,6 +28,10 @@ define(['underscore', 'backbone'], function(_, Backbone){
 					this.set('optionalParent', parent.get('name'));
 				}
 			}
+		},
+
+		getInheritedFEClasses:function(child){
+			return this.getFEClasses();
 		}
 	});
 

@@ -26,10 +26,19 @@ define(
 				initial:initial,
 				dlc:dlc
 			},
-			feclasses:{},
-			skills:{}
+			feclasses: new FEClasses(),
+			skills: new Skills()
+		},
+		addPromotion = function(from, to){
+			var toArray = feData.feclasses.getByName(from).get('to'),
+				fromArray = feData.feclasses.getByName(to).get('from');
+
+			fromArray.push(from);
+			toArray.push(to);
 		};
 
+
+	//Characters
 	initial.add(new Character({name:'Chrom',		gender:'M'}));
 	initial.add(new Character({name:'Avatar (M)',	gender:'M'}));
 	initial.add(new Character({name:'Avatar (F)',	gender:'F'}));
@@ -112,7 +121,186 @@ define(
 	children.getByName('Morgan (F)').set('parentOptions', ['*']);
 	children.getByName('Morgan (M)').set('parentOptions', ['*']);
 
-	debugger;
+
+	//Classes
+	feData.feclasses.add(new FEClass({name:"Lord"}));
+	feData.feclasses.add(new FEClass({name:"Tactician"}));
+	feData.feclasses.add(new FEClass({name:"Cavalier"}));
+	feData.feclasses.add(new FEClass({name:"Knight"}));
+	feData.feclasses.add(new FEClass({name:"Myrmidon"}));
+	feData.feclasses.add(new FEClass({name:"Thief"}));
+	feData.feclasses.add(new FEClass({name:"Barbarian"}));
+	feData.feclasses.add(new FEClass({name:"Fighter"}));
+	feData.feclasses.add(new FEClass({name:"Mercenary"}));
+	feData.feclasses.add(new FEClass({name:"Archer"}));
+	feData.feclasses.add(new FEClass({name:"Pegasus Knight"}));
+	feData.feclasses.add(new FEClass({name:"Wyvern Rider"}));
+	feData.feclasses.add(new FEClass({name:"Dark Mage"}));
+	feData.feclasses.add(new FEClass({name:"Mage"}));
+	feData.feclasses.add(new FEClass({name:"Priest"}));
+	feData.feclasses.add(new FEClass({name:"Cleric"}));
+	feData.feclasses.add(new FEClass({name:"Troubadour"}));
+	feData.feclasses.add(new FEClass({name:"Villager"}));
+	feData.feclasses.add(new FEClass({name:"Taguel"}));
+	feData.feclasses.add(new FEClass({name:"Lodestar"}));
+	feData.feclasses.add(new FEClass({name:"Bride"}));
+	feData.feclasses.add(new FEClass({name:"Dancer"}));
+	feData.feclasses.add(new FEClass({name:"Manakete"}));
+	feData.feclasses.add(new FEClass({name:"Dread Fighter"}));
+	feData.feclasses.add(new FEClass({name:"Conqueror"}));
+	feData.feclasses.add(new FEClass({name:"Great Lord"}));
+	feData.feclasses.add(new FEClass({name:"Grandmaster"}));
+	feData.feclasses.add(new FEClass({name:"Paladin"}));
+	feData.feclasses.add(new FEClass({name:"Great Knight"}));
+	feData.feclasses.add(new FEClass({name:"General"}));
+	feData.feclasses.add(new FEClass({name:"Swordmaster"}));
+	feData.feclasses.add(new FEClass({name:"Assassin");
+	feData.feclasses.add(new FEClass({name:"Trickster");
+	feData.feclasses.add(new FEClass({name:"Berserker"}));
+	feData.feclasses.add(new FEClass({name:"Warrior"}));
+	feData.feclasses.add(new FEClass({name:"Hero"}));
+	feData.feclasses.add(new FEClass({name:"Bow Knight"}));
+	feData.feclasses.add(new FEClass({name:"Sniper"}));
+	feData.feclasses.add(new FEClass({name:"Falcon Knight"}));
+	feData.feclasses.add(new FEClass({name:"Dark Flier"}));
+	feData.feclasses.add(new FEClass({name:"Wyvern Lord"}));
+	feData.feclasses.add(new FEClass({name:"Griffon Rider"}));
+	feData.feclasses.add(new FEClass({name:"Sorcerer"}));
+	feData.feclasses.add(new FEClass({name:"Dark Knight"}));
+	feData.feclasses.add(new FEClass({name:"Sage"}));
+	feData.feclasses.add(new FEClass({name:"War Monk"}));
+	feData.feclasses.add(new FEClass({name:"War Cleric"}));
+	feData.feclasses.add(new FEClass({name:"Valkyrie"}));
+
+	addPromotion("Lord",			"Great Lord");
+	addPromotion("Tactician",		"Grandmaster");
+	addPromotion("Cavalier",		"Paladin");
+	addPromotion("Cavalier",		"Great Knight");
+	addPromotion("Knight",			"Great Knight");
+	addPromotion("Knight",			"General");
+	addPromotion("Myrmidon",		"Swordmaster");
+	addPromotion("Myrmidon",		"Assassin");
+	addPromotion("Thief",			"Assassin");
+	addPromotion("Thief",			"Trickster");
+	addPromotion("Barbarian",		"Berserker");
+	addPromotion("Barbarian",		"Warrior");
+	addPromotion("Fighter",			"Warrior");
+	addPromotion("Fighter",			"Hero");
+	addPromotion("Mercenary",		"Hero");
+	addPromotion("Mercenary",		"Bow Knight");
+	addPromotion("Archer",			"Bow Knight");
+	addPromotion("Archer",			"Sniper");
+	addPromotion("Pegasus Knight",	"Falcon Knight");
+	addPromotion("Pegasus Knight",	"Dark Flier");
+	addPromotion("Wyvern Rider",	"Wyvern Lord");
+	addPromotion("Wyvern Rider",	"Griffon Rider");
+	addPromotion("Dark Mage",		"Sorcerer");
+	addPromotion("Dark Mage",		"Dark Knight");
+	addPromotion("Mage",			"Dark Knight");
+	addPromotion("Mage",			"Sage");
+	addPromotion("Priest",			"War Monk");
+	addPromotion("Priest",			"Sage");
+	addPromotion("Cleric",			"War Cleric");
+	addPromotion("Cleric",			"Sage");
+	addPromotion("Troubadour",		"War Cleric");
+	addPromotion("Troubadour",		"Valkyrie");
+
+
+	//Skills
+	feData.skills.add(new Skill({name:'Dual Strike+',		desc:'Adds 10% to Dual Strike rate'}));
+	feData.skills.add(new Skill({name:'Charm',				desc:'Hit rate and Avoid +5 to all allies within a 3 tile radius'}));
+	feData.skills.add(new Skill({name:'Aether',				desc:'Attack twice consecutively, with the first strike having a Sol effect and the second strike having a Luna effect'}));
+	feData.skills.add(new Skill({name:'Rightful King',		desc:'Adds 10% to Skill activation rates'}));
+	feData.skills.add(new Skill({name:'Veteran',			desc:'Experience gain x 1.5 when paired up'}));
+	feData.skills.add(new Skill({name:'Solidarity',			desc:'Critical and Critical Avoid +10 to adjacent allies'}));
+	feData.skills.add(new Skill({name:'Ignis',				desc:'Adds (Magic)/2 damage when attacking with weapons and (Strength)/2 damage when attacking with magic'}));
+	feData.skills.add(new Skill({name:'Rally Spectrum',		desc:'All stats +4 to all allies within a 3 tile radius for one Turn when the Rally command is used'}));
+	feData.skills.add(new Skill({name:'Discipline',			desc:'Weapon experience x2'}));
+	feData.skills.add(new Skill({name:'Outdoor Fighter',	desc:'Hit rate and Avoid +10 when fighting outdoors'}));
+	feData.skills.add(new Skill({name:'Defender',			desc:'All stats +1 when paired up'}));
+	feData.skills.add(new Skill({name:'Aegis',				desc:'Halves damage from bows, tomes and dragonstones'}));
+	feData.skills.add(new Skill({name:'Luna',				desc:'Ignores half the enemy\'s Defence or Resistance'}));
+	feData.skills.add(new Skill({name:'Dual Guard+',		desc:'Adds 10% to the Dual Guard rate'}));
+	feData.skills.add(new Skill({name:'Defence +2',			desc:'Defence +2'}));
+	feData.skills.add(new Skill({name:'Indoor Fighter',		desc:'Hit rate and Avoid +10 when fighting indoors'}));
+	feData.skills.add(new Skill({name:'Rally Defence',		desc:'Defence +4 to all allies within a 3 tile radius for one Turn when the Rally command is used'}));
+	feData.skills.add(new Skill({name:'Pavise',				desc:'Halves damage from swords, lances, axes (includes magical variants) and beaststones'}));
+	feData.skills.add(new Skill({name:'Avoid +10',			desc:'Avoid +10'}));
+	feData.skills.add(new Skill({name:'Vantage',			desc:'When HP under half, always attack first during the enemy\'s Turn'}));
+	feData.skills.add(new Skill({name:'Astra',				desc:'Deals 5 consecutive hits with half damage'}));
+	feData.skills.add(new Skill({name:'Swordfaire',			desc:'Strength +5 when equipped with a sword (Magic +5 when equipped with the Levin Sword)'}));
+	feData.skills.add(new Skill({name:'Armsthrift',			desc:'Attack does not reduce weapon usage'}));
+	feData.skills.add(new Skill({name:'Patience',			desc:'Hit rate and Avoid +10 during the enemy\'s Turn'}));
+	feData.skills.add(new Skill({name:'Sol',				desc:'Recover HP equal to half the damage dealt to the enemy'}));
+	feData.skills.add(new Skill({name:'Axebreaker',			desc:'Hit rate and Avoid +50 when the enemy is equipped with an axe'}));
+	feData.skills.add(new Skill({name:'HP +5',				desc:'Maximum HP +5'}));
+	feData.skills.add(new Skill({name:'Zeal',				desc:'Critical +5'}));
+	feData.skills.add(new Skill({name:'Rally Strength',		desc:'Strength +4 to all allies within a 3 tile radius for one Turn when the Rally command is used'}));
+	feData.skills.add(new Skill({name:'Counter',			desc:'Returns damage when attacked by an adjacent enemy'}));
+	feData.skills.add(new Skill({name:'Despoil',			desc:'Obtain Bullion (S) from the enemy if the user defeats the enemy'}));
+	feData.skills.add(new Skill({name:'Gamble',				desc:'Hit rate -5, Critical +10'}));
+	feData.skills.add(new Skill({name:'Wrath',				desc:'Critical +20 when under half HP'}));
+	feData.skills.add(new Skill({name:'Axefaire',			desc:'Strength +5 when equipped with an axe (Magic +5 when equipped with the Bolt Axe)'}));
+	feData.skills.add(new Skill({name:'Skill +2',			desc:'Skill +2'}));
+	feData.skills.add(new Skill({name:'Prescience',			desc:'Hit rate and Avoid +15 during the user\'s Turn'}));
+	feData.skills.add(new Skill({name:'Hit Rate +20',		desc:'Hit Rate +20'}));
+	feData.skills.add(new Skill({name:'Bowfaire',			desc:'Strength +5 when equipped with a bow'}));
+	feData.skills.add(new Skill({name:'Rally Skill',		desc:'Skill +4 to all allies within a 3 tile radius for one Turn when the Rally command is used'}));
+	feData.skills.add(new Skill({name:'Bowbreaker',			desc:'Hit rate and Avoid +50 when the enemy is equipped with a bow'}));
+	feData.skills.add(new Skill({name:'Locktouch',			desc:'Open doors and chests without the need of keys'}));
+	feData.skills.add(new Skill({name:'Movement +1',		desc:'Movement +1'}));
+	feData.skills.add(new Skill({name:'Lethality',			desc:'Instantly defeats the enemy'}));
+	feData.skills.add(new Skill({name:'Pass',				desc:'User can pass through tiles occupied by enemy units'}));
+	feData.skills.add(new Skill({name:'Lucky Seven',		desc:'Hit rate and Avoid +20 up to the 7th Turn'}));
+	feData.skills.add(new Skill({name:'Acrobat',			desc:'All traversable terrain costs 1 movement point to cross'}));
+	feData.skills.add(new Skill({name:'Speed +2',			desc:'Speed +2'}));
+	feData.skills.add(new Skill({name:'Relief',				desc:'Recover 20% HP at the start of the user\'s Turn if no units are within a 3 tile radius'}));
+	feData.skills.add(new Skill({name:'Rally Speed',		desc:'Speed +4 to all allies within a 3 tile radius for one Turn when the Rally command is used'}));
+	feData.skills.add(new Skill({name:'Lancefaire',			desc:'Strength +5 when equipped with a lance (Magic +5 when equipped with the Shockstick)'}));
+	feData.skills.add(new Skill({name:'Rally Movement',		desc:'Movement +1 to all allies within a 3 tile radius for one Turn when the Rally command is used'}));
+	feData.skills.add(new Skill({name:'Galeforce',			desc:'Allows the user another full action after they defeat an enemy during the user\'s Turn (only once per Turn)'}));
+	feData.skills.add(new Skill({name:'Strength +2',		desc:'Strength +2'}));
+	feData.skills.add(new Skill({name:'Tantivy',			desc:'Hit rate and Avoid +10 if no allies within a 3 tile radius'}));
+	feData.skills.add(new Skill({name:'Quick Burn',			desc:'Hit rate and Avoid +15 at the start of the chapter. Effect decreases with each passing Turn'}));
+	feData.skills.add(new Skill({name:'Swordbreaker',		desc:'Hit rate and Avoid +50 when the enemy is equipped with a sword'}));
+	feData.skills.add(new Skill({name:'Deliverer',			desc:'Movement +2 when paired up'}));
+	feData.skills.add(new Skill({name:'Lancebreaker',		desc:'Hit rate and Avoid +50 when the enemy is equipped with a lance'}));
+	feData.skills.add(new Skill({name:'Magic +2',			desc:'Magic +2'}));
+	feData.skills.add(new Skill({name:'Focus',				desc:'Critical +10 when no allies within a 3 tile radius'}));
+	feData.skills.add(new Skill({name:'Rally Magic',		desc:'Magic +4 to all allies within a 3 tile radius for one Turn when the Rally command is used'}));
+	feData.skills.add(new Skill({name:'Tomefaire',			desc:'Magic +5 when equipped with a Tome'}));
+	feData.skills.add(new Skill({name:'Hex',				desc:'Avoid -15 to all adjacent enemies'}));
+	feData.skills.add(new Skill({name:'Anathema',			desc:'Avoid and Critical Avoid -10 to all enemies within a 3 tile radius'}));
+	feData.skills.add(new Skill({name:'Vengeance',			desc:'Deals (user\'s Max HP - Current HP)/2 extra damage'}));
+	feData.skills.add(new Skill({name:'Tomebreaker',		desc:'Hit rate and Avoid +50 when the enemy is equipped with a tome'}));
+	feData.skills.add(new Skill({name:'Slow Burn',			desc:'Hit rate and Avoid increases by 1 each Turn, up to the 15th Turn'}));
+	feData.skills.add(new Skill({name:'Lifetaker',			desc:'User recovers 50% HP after they defeat an enemy during the user\'s Turn'}));
+	feData.skills.add(new Skill({name:'Miracle',			desc:'Character survives with 1 HP after receiving an attack that would otherwise KO them (must have over 1 HP)'}));
+	feData.skills.add(new Skill({name:'Healtouch',			desc:'Restores an extra 5 HP when healing allies'}));
+	feData.skills.add(new Skill({name:'Rally Luck',			desc:'Luck +8 to all allies within a 3 tile radius for one Turn when the Rally command is used'}));
+	feData.skills.add(new Skill({name:'Renewal',			desc:'Recover 30% HP at the start of the user\'s Turn'}));
+	feData.skills.add(new Skill({name:'Resistance +2',		desc:'Resistance +2'}));
+	feData.skills.add(new Skill({name:'Demoiselle',			desc:'Avoid and Critical Avoid +10 to all male allies within a 3 tile radius'}));
+	feData.skills.add(new Skill({name:'Rally Resistance',	desc:'Resistance +4 to all allies within a 3 tile radius for one Turn when the Rally command is used'}));
+	feData.skills.add(new Skill({name:'Dual Support+',		desc:'Increases the support bonus effect'}));
+	feData.skills.add(new Skill({name:'Aptitude',			desc:'Adds 20% to all growth rates during Level Ups'}));
+	feData.skills.add(new Skill({name:'Underdog',			desc:'Hit rate and Avoid +15 when user\'s Level is lower than the enemy (promoted units count as Level +20)'}));
+	feData.skills.add(new Skill({name:'Luck +4',			desc:'Luck +4'}));
+	feData.skills.add(new Skill({name:'Special Dance',		desc:'Strength, Magic, Defence and Resistance +2 for one Turn for the unit who receives the user\'s Dance'}));
+	feData.skills.add(new Skill({name:'Even Rhythm',		desc:'Hit rate and Avoid +10 during even numbered Turns'}));
+	feData.skills.add(new Skill({name:'Beastbane',			desc:'Deals effective damage beast units when user is a Taguel'}));
+	feData.skills.add(new Skill({name:'Odd Rhythm',			desc:'Hit rate and Avoid +10 during odd numbered Turns'}));
+	feData.skills.add(new Skill({name:'Wyrmsbane',			desc:'Deals effective damage to  (dragon) units when user is a Manakete'}));
+	feData.skills.add(new Skill({name:'Shadowgift',			desc:'Enables usage of Dark Tomes for Tome wielders (Aversa, Morgan as Aversa\'s daughter, DLC Micaiah and DLC Katarina only)'}));
+	feData.skills.add(new Skill({name:'Conquest',			desc:'Negates user\'s beast and armour type weaknesses (Walhart, Morgan as Walhart\'s son, Zephiel and DLC Ephraim only)'}));
+	feData.skills.add(new Skill({name:'Resistance +10',		desc:'Resistance +10'}));
+	feData.skills.add(new Skill({name:'Aggressor',			desc:'Attack +10 during the user\'s Turn'}));
+	feData.skills.add(new Skill({name:'Rally Love',			desc:'All stats +2 and Movement +1 to all allies within a 3 tile radius for one Turn when the Rally command is used'}));
+	feData.skills.add(new Skill({name:'Bonds',				desc:'Restores 10 HP to all allies within a 3 tile radius at the beginning of the user\'s Turn'}));
+	feData.skills.add(new Skill({name:'All Stats +2',		desc:'Strength, Magic, Skill, Speed, Luck, Defence and Resistance +2 (Learned by using the All Stats +2 item - DLC)'}));
+	feData.skills.add(new Skill({name:'Paragon',			desc:'Experience gain x2 (Learned by using the Paragon item - DLC)'}));
+	feData.skills.add(new Skill({name:'Iote\'s Shield',		desc:'Negates user\'s  (flying) type weakness (Learned by using the Iote\'s Shield item - DLC)'}));
+	feData.skills.add(new Skill({name:'Limit Break',		desc:'Raises the character\'s maximum stats by 10 (Learned by using the Limit Break item - DLC)'}));
 
 	return feData;
 });
