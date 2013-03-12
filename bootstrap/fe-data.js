@@ -35,6 +35,42 @@ define(
 
 			fromArray.push(from);
 			toArray.push(to);
+		},
+		setSkills = function(feClassName, skillNames){
+			var i = skillNames.length,
+				feClass = feData.feclasses.getByName(feClassName),
+				skills = [];
+
+			while(i--){
+				var skill = feData.skills.getByName(skillNames[i]);
+				skill.set('feclass', feClass);
+				skills.push(skill);
+			}
+
+			feClass.set('skills', skills);
+		},
+		getCharacterByName = function(name){
+			var character = feData.characters.initial.getByName(name);
+
+			if(!character){
+				character = feData.characters.children.getByName(name);
+			}
+
+			if(!character){
+				character = feData.characters.dlc.getByName(name);
+			}
+
+			return character;
+		},
+		setFEClasses = function(characterName, feClasses){
+			var character = getCharacterByName(characterName),
+				i = feClasses.length;
+
+			while(i--){
+				var feClass = feData.feclasses.getByName(feClasses[i]);
+				character.addFEClass(feClass);
+				feClass.addCharacter(character);
+			}
 		};
 
 
@@ -71,6 +107,11 @@ define(
 	initial.add(new Character({name:'Basilio',		gender:'M'}));
 	initial.add(new Character({name:'Flavia',		gender:'F'}));
 	initial.add(new Character({name:'Priam',		gender:'M'}));
+	initial.add(new Character({name:'Gangrel',		gender:'M'}));
+	initial.add(new Character({name:'Walhart',		gender:'M'}));
+	initial.add(new Character({name:'Emmeryn',		gender:'F'}));
+	initial.add(new Character({name:"Yen'fay",		gender:'M'}));
+	initial.add(new Character({name:'Aversa',		gender:'F'}));
 
 	children.add(new Character({name:'Lucina',		gender:'F',	constantParent:'Chrom'}));
 	children.add(new Character({name:'Owain',		gender:'M',	constantParent:'Lissa'}));
@@ -106,17 +147,17 @@ define(
 	dlc.add(new Character({name:'Katarina'}));
 
 	children.getByName('Lucina').set('parentOptions', ['Sully', 'Sumia', 'Maribelle', 'Olivia', 'Avatar (F)']);
-	children.getByName('Owain').set('parentOptions', ['Frederick', 'Virion', 'Stahl', 'Vaike', 'Kellam', "Lon'qu", 'Ricken', 'Gaius', 'Donnel', 'Gregorr', 'Libra', 'Henry', 'Avatar (M)']);
-	children.getByName('Inigo').set('parentOptions', ['Chrom', 'Frederick', 'Virion', 'Stahl', 'Vaike', 'Kellam', "Lon'qu", 'Ricken', 'Gaius', 'Donnel', 'Gregorr', 'Libra', 'Henry', 'Avatar (M)']);
-	children.getByName('Brady').set('parentOptions', ['Chrom', 'Frederick', 'Virion', 'Stahl', 'Vaike', 'Kellam', "Lon'qu", 'Ricken', 'Gaius', 'Donnel', 'Gregorr', 'Libra', 'Henry', 'Avatar (M)']);
-	children.getByName('Kjelle').set('parentOptions', ['Chrom', 'Frederick', 'Virion', 'Stahl', 'Vaike', 'Kellam', "Lon'qu", 'Ricken', 'Gaius', 'Donnel', 'Gregorr', 'Libra', 'Henry', 'Avatar (M)']);
-	children.getByName('Cynthia').set('parentOptions', ['Chrom', 'Frederick', 'Virion', 'Stahl', 'Vaike', 'Kellam', "Lon'qu", 'Ricken', 'Gaius', 'Donnel', 'Gregorr', 'Libra', 'Henry', 'Avatar (M)']);
-	children.getByName('Severa').set('parentOptions', ['Frederick', 'Virion', 'Stahl', 'Vaike', 'Kellam', "Lon'qu", 'Ricken', 'Gaius', 'Donnel', 'Gregorr', 'Libra', 'Henry', 'Avatar (M)']);
-	children.getByName('Gerome').set('parentOptions', ['Frederick', 'Virion', 'Stahl', 'Vaike', 'Kellam', "Lon'qu", 'Ricken', 'Gaius', 'Donnel', 'Gregorr', 'Libra', 'Henry', 'Avatar (M)']);
-	children.getByName('Yarne').set('parentOptions', ['Frederick', 'Virion', 'Stahl', 'Vaike', 'Kellam', "Lon'qu", 'Ricken', 'Gaius', 'Donnel', 'Gregorr', 'Libra', 'Henry', 'Avatar (M)']);
-	children.getByName('Laurent').set('parentOptions', ['Frederick', 'Virion', 'Stahl', 'Vaike', 'Kellam', "Lon'qu", 'Ricken', 'Gaius', 'Donnel', 'Gregorr', 'Libra', 'Henry', 'Avatar (M)']);
-	children.getByName('Noire').set('parentOptions', ['Frederick', 'Virion', 'Stahl', 'Vaike', 'Kellam', "Lon'qu", 'Ricken', 'Gaius', 'Donnel', 'Gregorr', 'Libra', 'Henry', 'Avatar (M)']);
-	children.getByName('Nah').set('parentOptions', ['Frederick', 'Virion', 'Stahl', 'Vaike', 'Kellam', "Lon'qu", 'Ricken', 'Gaius', 'Donnel', 'Gregorr', 'Libra', 'Henry', 'Avatar (M)']);
+	children.getByName('Owain').set('parentOptions', ['Frederick', 'Virion', 'Stahl', 'Vaike', 'Kellam', "Lon'qu", 'Ricken', 'Gaius', 'Donnel', 'Gregor', 'Libra', 'Henry', 'Avatar (M)']);
+	children.getByName('Inigo').set('parentOptions', ['Chrom', 'Frederick', 'Virion', 'Stahl', 'Vaike', 'Kellam', "Lon'qu", 'Ricken', 'Gaius', 'Donnel', 'Gregor', 'Libra', 'Henry', 'Avatar (M)']);
+	children.getByName('Brady').set('parentOptions', ['Chrom', 'Frederick', 'Virion', 'Stahl', 'Vaike', 'Kellam', "Lon'qu", 'Ricken', 'Gaius', 'Donnel', 'Gregor', 'Libra', 'Henry', 'Avatar (M)']);
+	children.getByName('Kjelle').set('parentOptions', ['Chrom', 'Frederick', 'Virion', 'Stahl', 'Vaike', 'Kellam', "Lon'qu", 'Ricken', 'Gaius', 'Donnel', 'Gregor', 'Libra', 'Henry', 'Avatar (M)']);
+	children.getByName('Cynthia').set('parentOptions', ['Chrom', 'Frederick', 'Virion', 'Stahl', 'Vaike', 'Kellam', "Lon'qu", 'Ricken', 'Gaius', 'Donnel', 'Gregor', 'Libra', 'Henry', 'Avatar (M)']);
+	children.getByName('Severa').set('parentOptions', ['Frederick', 'Virion', 'Stahl', 'Vaike', 'Kellam', "Lon'qu", 'Ricken', 'Gaius', 'Donnel', 'Gregor', 'Libra', 'Henry', 'Avatar (M)']);
+	children.getByName('Gerome').set('parentOptions', ['Frederick', 'Virion', 'Stahl', 'Vaike', 'Kellam', "Lon'qu", 'Ricken', 'Gaius', 'Donnel', 'Gregor', 'Libra', 'Henry', 'Avatar (M)']);
+	children.getByName('Yarne').set('parentOptions', ['Frederick', 'Virion', 'Stahl', 'Vaike', 'Kellam', "Lon'qu", 'Ricken', 'Gaius', 'Donnel', 'Gregor', 'Libra', 'Henry', 'Avatar (M)']);
+	children.getByName('Laurent').set('parentOptions', ['Frederick', 'Virion', 'Stahl', 'Vaike', 'Kellam', "Lon'qu", 'Ricken', 'Gaius', 'Donnel', 'Gregor', 'Libra', 'Henry', 'Avatar (M)']);
+	children.getByName('Noire').set('parentOptions', ['Frederick', 'Virion', 'Stahl', 'Vaike', 'Kellam', "Lon'qu", 'Ricken', 'Gaius', 'Donnel', 'Gregor', 'Libra', 'Henry', 'Avatar (M)']);
+	children.getByName('Nah').set('parentOptions', ['Frederick', 'Virion', 'Stahl', 'Vaike', 'Kellam', "Lon'qu", 'Ricken', 'Gaius', 'Donnel', 'Gregor', 'Libra', 'Henry', 'Avatar (M)']);
 
 	children.getByName('Morgan (F)').set('parentOptions', ['*']);
 	children.getByName('Morgan (M)').set('parentOptions', ['*']);
@@ -154,8 +195,8 @@ define(
 	feData.feclasses.add(new FEClass({name:"Great Knight"}));
 	feData.feclasses.add(new FEClass({name:"General"}));
 	feData.feclasses.add(new FEClass({name:"Swordmaster"}));
-	feData.feclasses.add(new FEClass({name:"Assassin");
-	feData.feclasses.add(new FEClass({name:"Trickster");
+	feData.feclasses.add(new FEClass({name:"Assassin"}));
+	feData.feclasses.add(new FEClass({name:"Trickster"}));
 	feData.feclasses.add(new FEClass({name:"Berserker"}));
 	feData.feclasses.add(new FEClass({name:"Warrior"}));
 	feData.feclasses.add(new FEClass({name:"Hero"}));
@@ -171,6 +212,7 @@ define(
 	feData.feclasses.add(new FEClass({name:"War Monk"}));
 	feData.feclasses.add(new FEClass({name:"War Cleric"}));
 	feData.feclasses.add(new FEClass({name:"Valkyrie"}));
+	feData.feclasses.add(new FEClass({name:"Overlord"}));
 
 	addPromotion("Lord",			"Great Lord");
 	addPromotion("Tactician",		"Grandmaster");
@@ -301,6 +343,89 @@ define(
 	feData.skills.add(new Skill({name:'Paragon',			desc:'Experience gain x2 (Learned by using the Paragon item - DLC)'}));
 	feData.skills.add(new Skill({name:'Iote\'s Shield',		desc:'Negates user\'s  (flying) type weakness (Learned by using the Iote\'s Shield item - DLC)'}));
 	feData.skills.add(new Skill({name:'Limit Break',		desc:'Raises the character\'s maximum stats by 10 (Learned by using the Limit Break item - DLC)'}));
+
+	//Associate skill and feclasses
+	setSkills("Lord",				["Dual Strike+", "Charm"]);
+	setSkills("Great Lord",			["Aether", "Rightful King"]);
+	setSkills("Tactician",			["Veteran", "Solidarity"]);
+	setSkills("Grandmaster",		["Ignis", "Rally Spectrum"]);
+	setSkills("Cavalier",			["Discipline", "Outdoor Fighter"]);
+	setSkills("Paladin",			["Defender", "Aegis"]);
+	setSkills("Great Knight",		["Luna", "Dual Guard+"]);
+	setSkills("Knight",				["Defence +2", "Indoor Fighter"]);
+	setSkills("General",			["Rally Defence", "Pavise"]);
+	setSkills("Myrmidon",			["Avoid +10", "Vantage"]);
+	setSkills("Swordmaster",		["Astra", "Swordfaire"]);
+	setSkills("Mercenary",			["Armsthrift", "Patience"]);
+	setSkills("Hero",				["Sol", "Axebreaker"]);
+	setSkills("Fighter",			["HP +5", "Zeal"]);
+	setSkills("Warrior",			["Rally Strength", "Counter"]);
+	setSkills("Barbarian",			["Despoil", "Gamble"]);
+	setSkills("Berserker",			["Wrath", "Axefaire"]);
+	setSkills("Archer",				["Skill +2", "Prescience"]);
+	setSkills("Sniper",				["Hit Rate +20", "Bowfaire"]);
+	setSkills("Bow Knight",			["Rally Skill", "Bowbreaker"]);
+	setSkills("Thief",				["Locktouch", "Movement +1"]);
+	setSkills("Assassin",			["Lethality", "Pass"]);
+	setSkills("Trickster",			["Lucky Seven", "Acrobat"]);
+	setSkills("Pegasus Knight",		["Speed +2", "Relief"]);
+	setSkills("Falcon Knight",		["Rally Speed", "Lancefaire"]);
+	setSkills("Dark Flier",			["Rally Movement", "Galeforce"]);
+	setSkills("Wyvern Rider",		["Strength +2", "Tantivy"]);
+	setSkills("Wyvern Lord",		["Quick Burn", "Swordbreaker"]);
+	setSkills("Griffon Rider",		["Deliverer", "Lancebreaker"]);
+	setSkills("Mage",				["Magic +2", "Focus"]);
+	setSkills("Sage",				["Rally Magic", "Tomefaire"]);
+	setSkills("Dark Mage",			["Hex", "Anathema"]);
+	setSkills("Sorcerer",			["Vengeance", "Tomebreaker"]);
+	setSkills("Dark Knight",		["Slow Burn", "Lifetaker"]);
+	setSkills("Priest",				["Miracle", "Healtouch"]);
+	setSkills("Cleric",				["Miracle", "Healtouch"]);
+	setSkills("War Monk",			["Rally Luck", "Renewal"]);
+	setSkills("War Cleric",			["Rally Luck", "Renewal"]);
+	setSkills("Troubadour",			["Resistance +2", "Demoiselle"]);
+	setSkills("Valkyrie",			["Rally Resistance", "Dual Support+"]);
+	setSkills("Villager",			["Aptitude", "Underdog"]);
+	setSkills("Dancer",				["Luck +4", "Special Dance"]);
+	setSkills("Taguel",				["Even Rhythm", "Beastbane"]);
+	setSkills("Manakete",			["Odd Rhythm", "Wyrmsbane"]);
+
+	//Associate feclasses and characters
+	setFEClasses("Chrom",			["Lord",			"Cavalier",			"Archer"]);
+	setFEClasses("Lissa",			["Cleric",			"Pegasus Knight",	"Troubadour"]);
+	setFEClasses("Frederick",		["Cavalier",		"Knight",			"Wyvern Rider"]);
+	setFEClasses("Sully",			["Cavalier",		"Myrmidon",			"Wyvern Rider"]);
+	setFEClasses("Virion",			["Archer",			"Wyvern Rider",		"Mage"]);
+	setFEClasses("Stahl",			["Cavalier",		"Archer",			"Myrmidon"]);
+	setFEClasses("Vaike",			["Fighter",			"Thief",			"Barbarian"]);
+	setFEClasses("Miriel",			["Mage",			"Troubadour",		"Dark Mage"]);
+	setFEClasses("Sumia",			["Pegasus Knight",	"Knight",			"Cleric"]);
+	setFEClasses("Kellam",			["Knight",			"Thief",			"Priest"]);
+	setFEClasses("Donnel",			["Villager",		"Fighter",			"Mercenary"]);
+	setFEClasses("Lon'qu",			["Myrmidon",		"Thief",			"Wyvern Rider"]);
+	setFEClasses("Ricken",			["Mage",			"Cavalier",			"Archer"]);
+	setFEClasses("Maribelle",		["Troubadour",		"Pegasus Knight",	"Mage"]);
+	setFEClasses("Panne",			["Taguel",			"Thief",			"Wyvern Rider"]);
+	setFEClasses("Gaius",			["Thief",			"Fighter",			"Myrmidon"]);
+	setFEClasses("Cordelia",		["Pegasus Knight",	"Mercenary",		"Dark Mage"]);
+	setFEClasses("Gregor",			["Mercenary",		"Barbarian",		"Myrmidon"]);
+	setFEClasses("Nowi",			["Manakete",		"Mage",				"Wyvern Rider"]);
+	setFEClasses("Libra",			["Priest",			"Mage",				"Dark Mage"]);
+	setFEClasses("Tharja",			["Dark Mage",		"Knight",			"Archer"]);
+	setFEClasses("Anna",			["Thief",			"Archer",			"Mage"]);
+	setFEClasses("Olivia",			["Dancer",			"Myrmidon",			"Pegasus Knight"]);
+	setFEClasses("Cherche",			["Wyvern Rider",	"Troubadour",		"Cleric"]);
+	setFEClasses("Henry",			["Dark Mage",		"Barbarian",		"Thief"]);
+	setFEClasses("Say'ri",			["Myrmidon",		"Pegasus Knight",	"Wyvern Rider"]);
+	setFEClasses("Tiki",			["Manakete",		"Wyvern Rider",		"Mage"]);
+	setFEClasses("Basilio",			["Fighter",			"Barbarian",		"Knight"]);
+	setFEClasses("Flavia",			["Mercenary",		"Thief",			"Knight"]);
+	setFEClasses("Gangrel",			["Thief",			"Barbarian",		"Dark Mage"]);
+	setFEClasses("Walhart",			["Overlord",		"Knight",			"Wyvern Rider"]);
+	setFEClasses("Emmeryn",			["Cleric",			"Pegasus Knight",	"Troubadour"]);
+	setFEClasses("Yen'fay",			["Myrmidon",		"Wyvern Rider",		"Archer"]);
+	setFEClasses("Aversa",			["Pegasus Knight",	"Wyvern Rider",		"Dark Mage"]);
+	setFEClasses("Priam",			["Mercenary",		"Myrmidon",			"Fighter"]);
 
 	return feData;
 });
