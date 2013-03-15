@@ -20,11 +20,13 @@ define(
 	var children = new Characters(),
 		initial = new Characters(),
 		dlc = new Characters(),
+		potentialChildren = new Characters(),
 		feData = {
 			characters:{
 				children:children,
 				initial:initial,
-				dlc:dlc
+				dlc:dlc,
+				potentialChildren:potentialChildren
 			},
 			feclasses: new FEClasses(),
 			skills: new Skills()
@@ -71,6 +73,19 @@ define(
 				character.addFEClass(feClass);
 				feClass.addCharacter(character);
 			}
+		},
+		overrideInheritedClasses = function(characterName, removeArray, addArray){
+			var character = initial.getByName(characterName);
+
+			character.getInheritedFEClasses = function(child){
+				var returnArray = this.getFEClasses();
+
+				if(child.get('gender') !== this.get('gender')){
+					return _.union(_.difference(returnArray, removeArray), addArray);
+				}
+
+				return returnArray;
+			}.bind(character);
 		};
 
 
@@ -145,6 +160,18 @@ define(
 	dlc.add(new Character({name:'Catria'}));
 	dlc.add(new Character({name:'Palla'}));
 	dlc.add(new Character({name:'Katarina'}));
+
+	potentialChildren.add(new Character({name:'Daughter of Vaike',	gender:'F',	optionalParent:'Vaike'}));
+	potentialChildren.add(new Character({name:'Daughter of Gaius',	gender:'F',	optionalParent:'Gaius'}));
+	potentialChildren.add(new Character({name:'Daughter of Donnel',	gender:'F',	optionalParent:'Donnel'}));
+	potentialChildren.add(new Character({name:'Daughter of Gregor',	gender:'F',	optionalParent:'Gregor'}));
+	potentialChildren.add(new Character({name:'Daughter of Henry',	gender:'F',	optionalParent:'Henry'}));
+	potentialChildren.add(new Character({name:'Son of Lissa',		gender:'M',	optionalParent:'Lissa'}));
+	potentialChildren.add(new Character({name:'Son of Miriel',		gender:'M',	optionalParent:'Miriel'}));
+	potentialChildren.add(new Character({name:'Son of Maribelle',	gender:'M',	optionalParent:'Maribelle'}));
+	potentialChildren.add(new Character({name:'Son of Olivia',		gender:'M',	optionalParent:'Olivia'}));
+	potentialChildren.add(new Character({name:'Son of Panne',		gender:'M',	optionalParent:'Panne'}));
+	potentialChildren.add(new Character({name:'Son of Cherche',		gender:'M',	optionalParent:'Cherche'}));
 
 	children.getByName('Lucina').set('parentOptions', ['Sully', 'Sumia', 'Maribelle', 'Olivia', 'Avatar (F)']);
 	children.getByName('Owain').set('parentOptions', ['Frederick', 'Virion', 'Stahl', 'Vaike', 'Kellam', "Lon'qu", 'Ricken', 'Gaius', 'Donnel', 'Gregor', 'Libra', 'Henry', 'Avatar (M)']);
@@ -426,6 +453,94 @@ define(
 	setFEClasses("Yen'fay",			["Myrmidon",		"Wyvern Rider",		"Archer"]);
 	setFEClasses("Aversa",			["Pegasus Knight",	"Wyvern Rider",		"Dark Mage"]);
 	setFEClasses("Priam",			["Mercenary",		"Myrmidon",			"Fighter"]);
+
+	//Set classes on the avatar
+	setFEClasses("Avatar (M)", [
+		"Lord",
+		"Great Lord",
+		"Tactician",
+		"Grandmaster",
+		"Cavalier",
+		"Knight",
+		"Paladin",
+		"Great Knight",
+		"General",
+		"Myrmidon",
+		"Thief",
+		"Swordmaster",
+		"Assassin",
+		"Trickster",
+		"Mercenary",
+		"Fighter",
+		"Barbarian",
+		"Archer",
+		"Berserker",
+		"Warrior",
+		"Hero",
+		"Bow Knight",
+		"Sniper",
+		"Wyvern Rider",
+		"Wyvern Lord",
+		"Griffon Rider",
+		"Dark Mage",
+		"Mage",
+		"Priest",
+		"Sorcerer",
+		"Dark Knight",
+		"Sage",
+		"War Monk"
+	]);
+	setFEClasses("Avatar (F)", [
+		"Lord",
+		"Great Lord",
+		"Tactician",
+		"Grandmaster",
+		"Cavalier",
+		"Knight",
+		"Paladin",
+		"Great Knight",
+		"General",
+		"Myrmidon",
+		"Thief",
+		"Swordmaster",
+		"Assassin",
+		"Trickster",
+		"Archer",
+		"Bow Knight",
+		"Sniper",
+		"Pegasus Knight",
+		"Falcon Knight",
+		"Dark Flier",
+		"Wyvern Rider",
+		"Wyvern Lord",
+		"Griffon Rider",
+		"Dark Mage",
+		"Mage",
+		"Cleric",
+		"Troubadour",
+		"Sorcerer",
+		"Dark Knight",
+		"Sage",
+		"War Cleric",
+		"Valkyrie"
+	]);
+
+	//Set up FE Class changes when inherited through parents of the opposite gender
+	//Format: 				ParentName,		RemoveList,							AddList
+	overrideInheritedClasses('Vaike',		['Fighter', 'Barbarian'],			['Knight', 'Mercenary']);
+	overrideInheritedClasses('Gaius',		['Fighter'],						['Pegasus Knight']);
+	overrideInheritedClasses('Donnel',		['Fighter', 'Villager'],			['Pegasus Knight', 'Troubadour']);
+	overrideInheritedClasses('Gregor',		['Barbarian '],						['Troubadour']);
+	overrideInheritedClasses('Henry',		['Barbarian '],						['Troubadour']);
+	overrideInheritedClasses('Gregor',		['Fighter', 'Villager'],			['Knight', 'Mercenary']);
+	overrideInheritedClasses('Lissa',		['Pegasus Knight', 'Troubadour'],	['Myrmidon', 'Barbarian']);
+	overrideInheritedClasses('Miriel',		['Troubadour '],					['Barbarian']);
+	overrideInheritedClasses('Maribelle',	['Pegasus Knight', 'Troubadour'],	['Cavalier', 'Priest']);
+	overrideInheritedClasses('Olivia',		['Dancer', 'Pegasus Knight'],		['Barbarian', 'Mercenary']);
+	overrideInheritedClasses('Panne',		['Wyvern Rider'],					['Barbarian']);
+	overrideInheritedClasses('Cherche',		['Troubadour '],					['Fighter']);
+
+	feData.getCharacterByName = getCharacterByName;
 
 	return feData;
 });
