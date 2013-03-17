@@ -1,5 +1,6 @@
-<ul>
-	<% for(var i = 0, l = length; i < l; i++){} %>
-		<li></li>
-	<% } %>
-</ul>
+<% for(var i = 0, l = collection.length; i < l; i++){ %>
+	<% var character = collection[i]; %>
+	<li class="<%= character.gender == 'M' ? 'male' : 'female' %> bg-item-gradient medium-padding collapse-horizontal border-item item cursor-selectable">
+		<%= character.name %>
+	</li>
+<% } %>

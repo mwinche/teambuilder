@@ -166,12 +166,6 @@ define(
 	potentialChildren.add(new Character({name:'Daughter of Donnel',	gender:'F',	optionalParent:'Donnel'}));
 	potentialChildren.add(new Character({name:'Daughter of Gregor',	gender:'F',	optionalParent:'Gregor'}));
 	potentialChildren.add(new Character({name:'Daughter of Henry',	gender:'F',	optionalParent:'Henry'}));
-	potentialChildren.add(new Character({name:'Son of Lissa',		gender:'M',	optionalParent:'Lissa'}));
-	potentialChildren.add(new Character({name:'Son of Miriel',		gender:'M',	optionalParent:'Miriel'}));
-	potentialChildren.add(new Character({name:'Son of Maribelle',	gender:'M',	optionalParent:'Maribelle'}));
-	potentialChildren.add(new Character({name:'Son of Olivia',		gender:'M',	optionalParent:'Olivia'}));
-	potentialChildren.add(new Character({name:'Son of Panne',		gender:'M',	optionalParent:'Panne'}));
-	potentialChildren.add(new Character({name:'Son of Cherche',		gender:'M',	optionalParent:'Cherche'}));
 
 	children.getByName('Lucina').set('parentOptions', ['Sully', 'Sumia', 'Maribelle', 'Olivia', 'Avatar (F)']);
 	children.getByName('Owain').set('parentOptions', ['Frederick', 'Virion', 'Stahl', 'Vaike', 'Kellam', "Lon'qu", 'Ricken', 'Gaius', 'Donnel', 'Gregor', 'Libra', 'Henry', 'Avatar (M)']);
@@ -456,8 +450,6 @@ define(
 
 	//Set classes on the avatar
 	setFEClasses("Avatar (M)", [
-		"Lord",
-		"Great Lord",
 		"Tactician",
 		"Grandmaster",
 		"Cavalier",
@@ -491,8 +483,6 @@ define(
 		"War Monk"
 	]);
 	setFEClasses("Avatar (F)", [
-		"Lord",
-		"Great Lord",
 		"Tactician",
 		"Grandmaster",
 		"Cavalier",

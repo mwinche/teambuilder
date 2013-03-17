@@ -1,0 +1,9 @@
+/*
+deviations.css - deviations from the OOCSS styles, one-offs, this should be looked at with scrutiny
+*/
+
+#initial, #children, #dlc{
+	width:150px;
+	display: inline-block;
+	max-height: 300px;
+}

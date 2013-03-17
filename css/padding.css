@@ -1,0 +1,27 @@
+/*
+	padding.css - margin and padding
+*/
+
+.small-padding{
+	padding:3px;
+}
+
+.medium-padding{
+	padding:5px;
+}
+
+.large-padding{
+	padding:8px;
+}
+
+.small-margin{
+	margin:3px;
+}
+
+.medium-margin{
+	margin:5px;
+}
+
+.large-margin{
+	margin:8px;
+}

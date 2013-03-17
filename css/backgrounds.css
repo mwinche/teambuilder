@@ -1,0 +1,20 @@
+/*
+backgrounds.css
+*/
+
+/*top:rgb(254, 242, 216) , bottom:rgb(227, 211, 178)*/
+
+.bg-item-gradient{
+	background:linear-gradient(top, rgb(254, 242, 216), rgb(227, 211, 178));
+	background:-webkit-linear-gradient(top, rgb(254, 242, 216), rgb(227, 211, 178));
+	background:-moz-linear-gradient(top, rgb(254, 242, 216), rgb(227, 211, 178));
+	background:-o-linear-gradient(top, rgb(254, 242, 216), rgb(227, 211, 178));
+}
+
+/*top:rgb(249, 79, 44) , bottom:rgb(222, 63, 41)*/
+.bg-selected-item{
+	background:linear-gradient(top, rgb(249, 79, 44), rgb(222, 63, 41));
+	background:-webkit-linear-gradient(top, rgb(249, 79, 44), rgb(222, 63, 41));
+	background:-moz-linear-gradient(top, rgb(249, 79, 44), rgb(222, 63, 41));
+	background:-o-linear-gradient(top, rgb(249, 79, 44), rgb(222, 63, 41));
+}

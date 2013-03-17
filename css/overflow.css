@@ -1,0 +1,21 @@
+/*
+overflow.css
+*/
+
+.scroll-horzonital{
+	overflow-x:scroll;
+}
+
+.collapse-horizontal{
+	overflow-x:hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
+
+.scroll-vertical{
+	overflow-y:scroll;
+}
+
+.hidden-vertical{
+	overflow-y:hidden;
+}

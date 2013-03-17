@@ -18,9 +18,15 @@ require.config({
 
 require(['bootstrap/fe-data', 'src/views/characterView', 'src/views/charactersView'],
 	function(feData, CharacterView, CharactersView){
-	var collView = new CharactersView({collection:feData.characters.initial});
+	var collViews = {
+			initial : new CharactersView({collection:feData.characters.initial}),
+			children : new CharactersView({collection:feData.characters.children}),
+			dlc : new CharactersView({collection:feData.characters.dlc})
+		};
 
-	$('#characters').append(collView.el);
+	$('#initial').append(collViews.initial.el);
+	$('#children').append(collViews.children.el);
+	$('#dlc').append(collViews.dlc.el);
 
 	return feData;
 });

@@ -1,0 +1,32 @@
+/*
+	standards.css
+*/
+
+*{
+	box-sizing:border-box;
+	margin:0px;
+	padding:0px;
+	vertical-align: top;
+}
+
+.fe{
+	font-family:verdana, "Trebuchet MS", Georgia;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.font-selected{
+	color:rgb(255, 235, 194);
+}
+
+.font-disabled{
+	color:rgb(135, 132, 111);
+}
+
+.cursor-selectable{
+	cursor:pointer;
+}
+
+.cursor-disabled{
+	cursor:default;
+}
