@@ -1,12 +1,12 @@
-define(['backbone', 'underscore', 'jquery', 'text!templates/characters.html', 'src/views/characterView'],
-	function(Backbone, _, $, template, CharacterView){
+define(['backbone', 'underscore', 'jquery', 'text!templates/namedItems.html'],
+	function(Backbone, _, $, template){
 	var compiled = _.template(template);
 
 	return Backbone.View.extend({
-		className:'characters',
+		className:'items',
 		tagName:'ul',
 		events:{
-			'click .item':'toggleItem'
+			'click .item':'clickItem'
 		},
 		initialize:function(){
 			this.listenTo(this.collection, 'all', this.render);
@@ -16,9 +16,10 @@ define(['backbone', 'underscore', 'jquery', 'text!templates/characters.html', 's
 		render:function(){
 			this.$el.html(compiled({collection:this.collection.toJSON()}));
 		},
-		toggleItem:function(event){
+		clickItem:function(event){
 			$(event.target).toggleClass('bg-selected-item');
 			$(event.target).toggleClass('font-selected');
+			this.trigger('itemClicked', event.target);
 		}
 	},{
 		TEMPLATE:compiled

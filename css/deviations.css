@@ -2,8 +2,12 @@
 deviations.css - deviations from the OOCSS styles, one-offs, this should be looked at with scrutiny
 */
 
-#initial, #children, #dlc{
+.items, .characters{
 	width:150px;
-	display: inline-block;
 	max-height: 300px;
+}
+
+#dlc, #initial, #children, #skills, #feClasses{
+	display: inline-block;
+	border:1px solid black;
 }

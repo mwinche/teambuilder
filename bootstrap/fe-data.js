@@ -531,6 +531,20 @@ define(
 	overrideInheritedClasses('Cherche',		['Troubadour '],					['Fighter']);
 
 	feData.getCharacterByName = getCharacterByName;
+	feData.getAdvancedFEClasses = function(feClasses){
+		var i = feClasses.length, results = [], feClass;
+
+		while(i--){
+			results = _.union(results, feClasses[i]);
+
+			feClass = feData.feclasses.getByName(feClasses[i]);
+			if(feClass && feClass.get('to')){
+				results = _.union(results, feClass.get('to'));
+			}
+		}
+
+		return results;
+	};
 
 	return feData;
 });
