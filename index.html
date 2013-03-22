@@ -16,101 +16,10 @@
 		<div id="feClasses"><h3>Classes</h3></div>
 		<div id="skills"><h3>Skills</h3></div>
 		<script>
-			var api = {};
-			require(['bootstrap/fe-data'],function(feData){
-				var characterRules = [],
-					skillRules = [],
-					feClassRules = [];
-
-				api.addRule = function(rule){
-					var character, skill, feClass, child, parent;
-
-					if(rule.parent){
-						child = feData.getCharacterByName(rule.child);
-						parent = feData.getCharacterByName(rule.parent);
-
-						if(!child){
-							console.warn(rule.child, ' could not be found');
-						}
-
-						if(!parent){
-							console.warn(rule.parent, ' could not be found');
-						}
-
-						if(child && parent){
-							child.setOptionalParent(parent);
-						}
-					}
-					
-					if(rule.character){
-						character = feData.getCharacterByName(rule.character);
-
-						if(!character){
-							console.warn(rule.character, ' could not be found');
-						}
-						else{
-							characterRules.push(rule);
-						}
-					}
-
-					if(rule.skill){
-						skill = feData.skills.getByName(rule.skill);
-
-						if(!skill){
-							console.warn(rule.skill, ' could not be found');
-						}
-						else{
-							skillRules.push(rule);
-						}
-					}
-
-					if(rule.feClass){
-						feClass = feData.feclasses.getByName(rule.feClass);
-
-						if(!feClass){
-							console.warn(rule.feClass, ' could not be found');
-						}
-						else{
-							feClassRules.push(rule);
-						}
-					}
-				};
-
-				api.resetRules = function(){
-					characterRules = [];
-					skillRules = [];
-					feClassRules = [];
-
-					feData.characters.children.each(function(item){item.setOptionalParent(null);});
-				};
-
-				api.getFEClasses = function(){
-					var returnFEClasses = feData.feclasses.map(function(item){return item.get('name');}),
-						i = characterRules.length,
-						character, constantParent, optionalParent, characterClasses;
-
-					while(i--){
-						character = feData.getCharacterByName(characterRules[i].character);
-
-						constantParent = character && feData.getCharacterByName(character.get('constantParent'));
-						optionalParent = character && feData.getCharacterByName(character.get('optionalParent'));
-
-						characterClasses = character.getFEClasses(constantParent, optionalParent);
-						characterClasses = _.union(characterClasses, feData.getAdvancedFEClasses(characterClasses));
-
-						returnFEClasses = _.intersection(returnFEClasses, characterClasses);
-					}
-
-					return returnFEClasses;
-				};
-
-				api.getSkills = function(){
-
-				};
-
-				api.getCharacters = function(){
-
-				};
+			var API = {};
+			require(['src/api', 'bootstrap/fe-data'],function(api, feData){
+				API = api;
+				API.setFEData(feData);
 			});
 		</script>
 	</body>

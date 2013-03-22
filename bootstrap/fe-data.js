@@ -21,12 +21,14 @@ define(
 		initial = new Characters(),
 		dlc = new Characters(),
 		potentialChildren = new Characters(),
+		all = new Characters(),
 		feData = {
 			characters:{
 				children:children,
 				initial:initial,
 				dlc:dlc,
-				potentialChildren:potentialChildren
+				potentialChildren:potentialChildren,
+				all:all
 			},
 			feclasses: new FEClasses(),
 			skills: new Skills()
@@ -86,6 +88,13 @@ define(
 
 				return returnArray;
 			}.bind(character);
+		},
+		addPotentialChild = function(parent, gender){
+			potentialChildren.add(new Character({
+				name:(gender === 'M' ? 'Son' : 'Daughter') + ' of ' + parent,
+				gender:gender,
+				optionalParent:parent
+			}));
 		};
 
 
@@ -161,11 +170,45 @@ define(
 	dlc.add(new Character({name:'Palla'}));
 	dlc.add(new Character({name:'Katarina'}));
 
-	potentialChildren.add(new Character({name:'Daughter of Vaike',	gender:'F',	optionalParent:'Vaike'}));
-	potentialChildren.add(new Character({name:'Daughter of Gaius',	gender:'F',	optionalParent:'Gaius'}));
-	potentialChildren.add(new Character({name:'Daughter of Donnel',	gender:'F',	optionalParent:'Donnel'}));
-	potentialChildren.add(new Character({name:'Daughter of Gregor',	gender:'F',	optionalParent:'Gregor'}));
-	potentialChildren.add(new Character({name:'Daughter of Henry',	gender:'F',	optionalParent:'Henry'}));
+	addPotentialChild('Chrom', 'F');
+	addPotentialChild('Chrom', 'M');
+	addPotentialChild('Frederick', 'F');
+	addPotentialChild('Frederick', 'M');
+	addPotentialChild('Virion', 'F');
+	addPotentialChild('Virion', 'M');
+	addPotentialChild('Stahl', 'F');
+	addPotentialChild('Stahl', 'M');
+	addPotentialChild('Vaike', 'F');
+	addPotentialChild('Vaike', 'M');
+	addPotentialChild('Kellam', 'F');
+	addPotentialChild('Kellam', 'M');
+	addPotentialChild('Lon\'qu', 'F');
+	addPotentialChild('Lon\'qu', 'M');
+	addPotentialChild('Ricken', 'F');
+	addPotentialChild('Ricken', 'M');
+	addPotentialChild('Gaius', 'F');
+	addPotentialChild('Gaius', 'M');
+	addPotentialChild('Donnel', 'F');
+	addPotentialChild('Donnel', 'M');
+	addPotentialChild('Gregor', 'F');
+	addPotentialChild('Gregor', 'M');
+	addPotentialChild('Libra', 'F');
+	addPotentialChild('Libra', 'M');
+	addPotentialChild('Henry', 'F');
+	addPotentialChild('Henry', 'M');
+	addPotentialChild('Avatar (M)', 'F');
+	addPotentialChild('Avatar (M)', 'M');
+	addPotentialChild('Sully', 'F');
+	addPotentialChild('Sumia', 'F');
+	addPotentialChild('Maribelle', 'F');
+	addPotentialChild('Olivia', 'F');
+	addPotentialChild('Avatar (F)', 'F');
+	addPotentialChild('Avatar (F)', 'M');
+
+	initial.forEach(function(item){all.add(item);});
+	children.forEach(function(item){all.add(item);});
+	dlc.forEach(function(item){all.add(item);});
+	potentialChildren.forEach(function(item){all.add(item);});
 
 	children.getByName('Lucina').set('parentOptions', ['Sully', 'Sumia', 'Maribelle', 'Olivia', 'Avatar (F)']);
 	children.getByName('Owain').set('parentOptions', ['Frederick', 'Virion', 'Stahl', 'Vaike', 'Kellam', "Lon'qu", 'Ricken', 'Gaius', 'Donnel', 'Gregor', 'Libra', 'Henry', 'Avatar (M)']);
