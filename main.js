@@ -16,8 +16,8 @@ require.config({
 	}
 });
 
-require(['bootstrap/fe-data', 'src/views/characterView', 'src/views/charactersView', 'src/views/itemsView'],
-	function(feData, CharacterView, CharactersView, ItemsView){
+require(['bootstrap/fe-data', 'src/views/characterView', 'src/views/charactersView', 'src/views/itemsView', 'jquery'],
+	function(feData, CharacterView, CharactersView, ItemsView, $){
 	var collViews = {
 			initial : new CharactersView({collection:feData.characters.initial}),
 			children : new CharactersView({collection:feData.characters.children}),
